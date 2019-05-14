@@ -27,12 +27,12 @@ class _KeepAliveTabState extends State<KeepAliveTab>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
     _body = [
       KeepAlivePage("小汽车"),
       KeepAlivePage("公交车"),
       KeepAlivePage("自行车"),
     ];
+    _tabController = TabController(length: _body.length, vsync: this);
   }
 
   @override
@@ -44,6 +44,7 @@ class _KeepAliveTabState extends State<KeepAliveTab>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: _Drawer(),
       appBar: AppBar(
         title: Text("Keep Alive Demo"),
 
@@ -75,6 +76,9 @@ class _KeepAliveTabState extends State<KeepAliveTab>
         controller: _tabController,
       ),
       floatingActionButton: FloatingActionButton(
+//        heroTag: null,
+        backgroundColor: Colors.redAccent,
+        tooltip: "点击累加",
         onPressed: () {
           _body[_tabController.index].add();
         },
@@ -129,16 +133,50 @@ class _KeepAlivePageState extends State<KeepAlivePage>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(pageTitle),
-            Text(
-              "当前点击次数:$_count",
-            )
-          ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 40.0),
+            child: Text(
+              pageTitle,
+              style: TextStyle(fontSize: 30),
+            ),
+          ),
+          Text(
+            "当前点击次数:$_count",
+            style: TextStyle(fontSize: 20),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _Drawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(0.0, 24.0, 0.0, 0.0),
+      child: Card(
+        shape: RoundedRectangleBorder(),
+        margin: const EdgeInsets.all(0.0),
+        elevation: 4.0,
+        child: Container(
+          width: 295.0,
+          padding: const EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 40.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              CircleAvatar(
+                radius: 40.0,
+                backgroundImage: NetworkImage(
+                    "http://img1d.xgo-img.com.cn/pics/1538/1537599.jpg"),
+              ),
+            ],
+          ),
         ),
       ),
     );

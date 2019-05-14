@@ -11,7 +11,6 @@ class BottomNavigationWidget extends StatefulWidget {
 }
 
 class _NavBarState extends State<BottomNavigationWidget> {
-  Color _color = Colors.blue;
   int _currentIndex = 0;
   final List<Widget> _pages = List();
 
@@ -19,7 +18,6 @@ class _NavBarState extends State<BottomNavigationWidget> {
   void initState() {
     super.initState();
     _currentIndex = 0;
-    _color = Colors.blue;
     _pages
       ..add(HomePage())
       ..add(ContactsPage())
@@ -32,6 +30,8 @@ class _NavBarState extends State<BottomNavigationWidget> {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        fixedColor: Colors.blue,
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: (index) {
           //刷新状态
@@ -43,39 +43,31 @@ class _NavBarState extends State<BottomNavigationWidget> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
-              color: _color,
             ),
             title: Text(
               '首页',
-              style: TextStyle(color: _color),
             ),
           ),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.supervisor_account,
-                color: _color,
               ),
               title: Text(
                 '朋友',
-                style: TextStyle(color: _color),
               )),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.search,
-                color: _color,
               ),
               title: Text(
                 '搜索',
-                style: TextStyle(color: _color),
               )),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.perm_identity,
-                color: _color,
               ),
               title: Text(
                 '我的',
-                style: TextStyle(color: _color),
               )),
         ],
       ),
